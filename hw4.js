@@ -1,9 +1,9 @@
 /*
    Name: Barira Qureshi
-    Name of File: hw3.js
-    Date Created: 2024-09-01
+    Name of File: hw4.js
+    Date Created: 2024-12-01
     Date Updated: 
-    Purpose: Homework 3 JS
+    Purpose: Homework 4 JS
 */
 //Dynamic date js code
 const d = new Date();
@@ -18,28 +18,28 @@ let slider = document.getElementById("range")
     slider.oninput = function () {output.innerHTML = this.value;};
 
 //first name validation js
-function validateFname(){
-    fname = document.getElementById("fname").value.trim();
-    var namePattern = /^[a-zA-Z'-]+$/; 
-    //checks if there is a value input for first name 
-    if (fname == "") {
-        document.getElementById("fname-error").innerHTML = "First name cannot be empty."; 
-        return false; 
-    } else if (fname != "") {
-        if (!fname.match(namePattern)) { //checks if fname matches pattern
+function validateFname() {
+    const fname = document.getElementById("fname").value.trim();
+    const namePattern = /^[a-zA-Z'-]+$/;
+
+    if (!fname) {
+        document.getElementById("fname-error").innerHTML = "First name cannot be empty.";
+        return false;
+    }
+    if (!namePattern.test(fname)) {
         document.getElementById("fname-error").innerHTML = "Letters, apostrophes, and dashes only.";
         return false;
-    } else if (fname.length < 2) { //checks that name is at least 1 character 
-        document.getElementById("fname-error").innerHTML = "First name cannot be less than 2 characters.";
-        return false;
-    } else if (fname.length > 30) { //checks that name is less than 30 characters
-        document.getElementById("fname-error").innerHTML = "First name cannot be more than 30 characters.";
-        return false;
-    } else {
-        document.getElementById("fname-error").innerHTML = "";
-        return true; 
     }
-}
+    if (fname.length < 2) {
+        document.getElementById("fname-error").innerHTML = "First name must be at least 2 characters.";
+        return false;
+    }
+    if (fname.length > 30) {
+        document.getElementById("fname-error").innerHTML = "First name cannot exceed 30 characters.";
+        return false;
+    }
+    document.getElementById("fname-error").innerHTML = "";
+    return true;
 }
 
 //middle initial validation js
@@ -89,8 +89,8 @@ function validateLname(){
 //dob javascript validation  
     function validateDob() {
         dob=document.getElementById("dob");
-        let date = new Date(dob.value);
-        let maxDate = new Date().setFullYear(new Date()-120)
+        const maxDate = new Date();
+        maxDate.setFullYear(maxDate.getFullYear() - 120);
 
     if (date > new Date()) {
         document.getElementById("dob-error").innerHTML = "Date cannot be in the future."
@@ -189,7 +189,7 @@ function validateSsn(){
 
  //phone number validation in javascript 
  function validatePnum () {
-    const phoneInput = document.GetElementById("pnum")
+    const phoneInput = document.getElementById("pnum")
     const phone = phoneInput.value.replace(/\D/g,""); //removes all non-number characters
 
     if (phone.length != 10) {
@@ -403,3 +403,86 @@ function removeReview() {
     }
 
  }
+
+ /* cookie for remembering information on form*/ 
+ function setCookie (name, cvalue, expiryDays) {
+    var day = new Date();
+    day.setTime(day.getTime() + (expiryDays*24*60*60*1000));
+    var expires = "expires=" + day.toUTCString(); 
+    document.cookie = name + "=" + cvalue + ";" + expires + ";path=/";
+ }
+
+ function getCookie (name) {
+    var cookieName = name + "="; 
+    var cookies = document.cookie.split(';'); 
+
+    for (var i = 0; i < cookies.length; i++){
+        var cookie = cookies[i].trim();
+        while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+        }
+        }
+        if (cookie.indexOf(cookieName) == 0) {
+            return cookie.substring(cookieName.length, cookie.length); 
+        }
+    return " ";
+ }
+ 
+
+ var inputs = [
+   {id: "fname", cookieName: "firstName"}, 
+   {id: "minitial", cookieName: "midInitial"}, 
+   {id: "lname", cookieName: "lastName"}, 
+   {id: "dob", cookieName: "dob"}, 
+   {id: "ssn", cookieName: "ssn"}, 
+   {id: "address1", cookieName: "address"}, 
+   {id: "address2", cookieName: "address2"}, 
+   {id: "city", cookieName: "city"}, 
+   {id: "zcode", cookieName: "zipcode"}, 
+   {id: "email", cookieName: "email"}, 
+   {id: "pnum", cookieName: "phoneNumber"}, 
+   {id: "uname", cookieName: "userName"}, 
+ ]
+
+ inputs.forEach(function(input) {
+    var inputElement = document.getElementById(input.id);
+
+    // Ensure inputElement exists before performing operations
+    if (inputElement) {
+        // Prefill input fields with value from the cookie
+        var cookieValue = getCookie(input.cookieName); // Fixed typo: `input.cookiename` -> `input.cookieName`
+        if (cookieValue !== "") { // Correct comparison to check for empty strings
+            inputElement.value = cookieValue;
+        }
+
+        // Set a cookie with the input value when the input field changes
+        inputElement.addEventListener("input", function() {
+            setCookie(input.cookieName, inputElement.value, 30); 
+        });
+    } else {
+        console.warn(`Input element with ID "${input.id}" not found.`);
+    }
+});
+
+ //greet the user with name and message if the cookie is set 
+
+ var firstName = getCookie("firstName");
+ if (firstName && firstName.trim() !== "") {
+     document.getElementById("welcome1").innerHTML = "Welcome Back, " + firstName + "! </br>";
+     document.getElementById("welcome2").innerHTML =
+         "<a href='#' id='new-user'> Not " + firstName + "? Click here to start a new form. </a>";
+ 
+     document.getElementById("new-user").addEventListener("click", function() {
+         var inputs = [
+             { cookieName: "firstName" },
+             { cookieName: "lastName" },
+             // Add other cookies here
+         ];
+         inputs.forEach(function(input) {
+             setCookie(input.cookieName, "", -1);
+         });
+         location.reload();
+     });
+ }
+ 
+
