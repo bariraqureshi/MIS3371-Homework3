@@ -1,18 +1,25 @@
 /* 
     Name: Barira Qureshi
-    Date Created: 2024-09-01
+    Date Created: 2024-12-01
     Date Updated: 
-    Assignment: Homework 3
-    Purpose: Style Sheet for MIS 3371 HW3
+    Assignment: Homework 4
+    Purpose: Style Sheet for MIS 3371 HW4
 */ 
 
 header {
-    text-align: center; 
+    position: sticky; 
+    top: 0; 
     width: 100%;
     background-color: aliceblue; 
     font-family: "Poppins", sans-serif;
+    transition: background-color 0.4 ease-in-out; 
+    z-index: 1000; 
 }
 
+header.scrolled {
+    background-color:aliceblue;
+    opacity: 1.0; 
+}
 body {
     display: flex;
     flex-direction: column;
@@ -60,13 +67,13 @@ th {
 }
 
 footer {
-    position: flex;
+    display: flex;
     bottom: 0;
     width: 100%;
     background-color: aliceblue;
-    height: 2.5 rem; 
+    height: 50px; 
     text-align: center;
-    padding: 10px 0; 
+    padding: 20px 0; 
 }
 
 #footer {
@@ -184,7 +191,7 @@ td.outputdata {
     background-color: rgb(102, 148, 170);
     border-width: 1px; 
     border-style: solid; 
-    color: lightskyblue;
+    color: black;
     background-color: lightskyblue;
     font-size: 15px;
     font-weight: bold; 
@@ -195,4 +202,36 @@ td.outputdata {
     margin-top: 20px;
     text-align: center; 
     font-family: "Source Sans Pro", sans-serif;
+}
+
+/*iframe styling*/ 
+.iframe-container {
+    position: absolute;
+    top: 25%;
+    right: 15px;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box; 
+}
+.iframe-container iframe{
+    width: 95%;
+    height: 20%; 
+    border: 1px solid black;
+}
+
+#welcome1 {
+    margin-top: 20px; 
+    font-size: 20px; 
+    text-align: center; 
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: normal; 
+}
+
+#welcome1 {
+    margin-top: 20px; 
+    font-size: 20px; 
+    text-align: center; 
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: normal; 
 }
