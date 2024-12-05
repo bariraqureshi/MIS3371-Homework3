@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--
     Name: Barira Qureshi
-    Date Created: 2024-09-01
+    Date Created: 2024-12-01
     Date Updated: 
-    Assignment: Homework 3
+    Assignment: Homework 4
     Purpose: HTML Registration Form for MIS 3371 HW3
 -->
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="hw3.css"> <!--links the css file-->
+    <link rel="stylesheet" href="hw4.css"> <!--links the css file-->
     <!-- displays text in browser's tab-->
     <title> New Patient Registration | CareBridge Medical</title>
 </head>
@@ -33,6 +33,14 @@
         </table>
       </header>
 <hr>
+
+<!--adds welcome message-->
+<center>
+    <span id="welcome1"></span>
+    <span id="welcome2"></span>
+</center>
+<div class="iframe-container">
+    <iframe class="frame" src="https://www.w3schools.com" frameborder="0"></iframe></div>
 <!--form starts here-->
 <form name="signup" id="signup" action="thankyou.html">
     <center>
@@ -524,7 +532,7 @@
                 <tr>
                     <td class="td1" colspan="4">
                         <center>
-                            <input type="Submit" name="Sumbit" id="Submit" style="font-family:'Courier New', Courier, monospace">
+                            <input type="Submit" name="Submit" id="Submit" style="font-family:'Courier New', Courier, monospace">
                             &nbsp;&nbsp;&nbsp;
                             <input type="Reset" value="Clear and Start Over" style="font-family:'Courier New', Courier, monospace">
                             &nbsp;&nbsp;&nbsp;
@@ -553,12 +561,9 @@
     </div>
     </center>
 </form> 
-<!--footer goes here that contains website link-->
-<footer>
-        <p id="footer">&#169 2024 CareBridge | <a href="insert.link.here" target="_blank" rel="noopener noreferrer">Contact Us!</a></p>
-</footer>
-
-<script src="hw3.js"></script>
+<!--iframe footer goes here that contains website link-->
+<iframe src="footer.html" width="100" height="100px" title="footer"></iframe>
+<script src="hw4.js"></script>
 <!--Adds the alert box to the form when it is needed-->
 <div id="alert-box">
     <div id="alert-content">
